@@ -1,22 +1,19 @@
-from crewai_tools import BaseTool
-import requests
+import wikipedia
+from tools.custom_tool import CustomTool
 
-class WikipediaTool(BaseTool):
-    name = "Wikipedia Search Tool"
-    description = "Busca informações da Wikipedia em português"
+def wikipedia_search(query: str) -> str:
+    wikipedia.set_lang("pt")
+    try:
+        return wikipedia.summary(query, sentences=3)
+    except wikipedia.exceptions.DisambiguationError as e:
+        return f"Termo ambíguo. Exemplos: {', '.join(e.options[:3])}"
+    except wikipedia.exceptions.PageError:
+        return f"Nenhuma página encontrada para '{query}'."
+    except Exception as ex:
+        return f"Erro: {str(ex)}"
 
-    def _run(self, query: str) -> str:
-        url = f"https://pt.wikipedia.org/w/api.php"
-        params = {
-            "action": "query",
-            "prop": "extracts",
-            "exlimit": 1,
-            "explaintext": 1,
-            "titles": query,
-            "format": "json",
-            "utf8": 1,
-            "redirects": 1
-        }
-        response = requests.get(url, params=params)
-        pages = response.json().get("query", {}).get("pages", {})
-        return next(iter(pages.values())).get("extract", "Nada encontrado.")
+wikipedia_tool = CustomTool(
+    name="Wikipedia Search",
+    description="Busca resumos da Wikipedia em português sobre o tema fornecido.",
+    func=wikipedia_search
+)
