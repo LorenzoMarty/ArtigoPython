@@ -1,0 +1,8 @@
+crewai>=0.29.0
+langchain
+openai
+requests
+pydantic
+wikipedia
+Flask
+# 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
