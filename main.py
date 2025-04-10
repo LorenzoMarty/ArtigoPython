@@ -61,10 +61,10 @@ def parse_article(text: str) -> dict:
 
 # Função principal para gerar o artigo
 def generate_article(tema: str) -> Article:
-    redator = Agent(
-        role="Redator",
+    escritor = Agent(
+        role="escritor",
         goal="Escrever um artigo científico com estrutura e formatação ABNT",
-        backstory="Redator experiente que segue normas técnicas. Seu texto tem título, autores, resumo, palavras-chave, introdução, materiais e métodos, resultados e discussão, conclusões, agradecimentos e referências.",
+        backstory="escritor experiente que segue normas técnicas. Seu texto tem título, autores, resumo, palavras-chave, introdução, materiais e métodos, resultados e discussão, conclusões, agradecimentos e referências.",
         llm=llm_groq,
         verbose=True,
     )
@@ -83,10 +83,10 @@ def generate_article(tema: str) -> Article:
             "Evite repetir qualquer seção. Cada seção deve aparecer apenas uma vez no artigo."
         ),
         expected_output="Artigo completo com pelo menos 800 palavras, respeitando as seções da estrutura ABNT.",
-        agent=redator,
+        agent=escritor,
     )
 
-    crew = Crew(agents=[pesquisador, redator], tasks=[task1, task2], verbose=True)
+    crew = Crew(agents=[pesquisador, escritor], tasks=[task1, task2], verbose=True)
 
     result = crew.kickoff()
     text = result.result if hasattr(result, "result") else str(result)
