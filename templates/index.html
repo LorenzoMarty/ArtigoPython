@@ -1,15 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Gerador de Artigos</title>
-</head>
-<body>
-  <h1>Gerador de Artigos com CrewAI</h1>
-  <form action="/gerar-artigo" method="post">
-    <label for="tema">Tema do Artigo:</label><br>
-    <input type="text" id="tema" name="tema" required><br><br>
-    <button type="submit">Gerar Artigo</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Artigos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #cfd8dc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: #ffffff;
+        padding: 40px 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        animation: fadeIn 0.8s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        font-size: 26px;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #34495e;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-bottom: 20px;
+        transition: border-color 0.3s;
+      }
+
+      input[type="text"]:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(to right, #3498db, #2980b9);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: linear-gradient(to right, #2980b9, #2471a3);
+      }
+
+      @media (max-width: 500px) {
+        .card {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Gerador de Artigos com CrewAI</h1>
+      <form action="/gerar-artigo" method="post">
+        <label for="tema">Tema do Artigo:</label>
+        <input type="text" id="tema" name="tema" placeholder="Digite o tema desejado..." required />
+        <button type="submit">Gerar Artigo</button>
+      </form>
+    </div>
+  </body>
 </html>

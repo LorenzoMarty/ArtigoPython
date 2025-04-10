@@ -1,8 +1,11 @@
 crewai>=0.29.0
+crewai-tools
 langchain
+langchain-openai
 openai
-requests
 pydantic
 wikipedia
 Flask
-# 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
+python-dotenv
+
+# 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
