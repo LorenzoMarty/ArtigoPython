@@ -1,26 +1,26 @@
 from flask import Flask, request, jsonify, render_template
-from main import generate_article
+from main import generate_article # Importa a função principal que gera o artigo
 
-app = Flask(__name__)
+app = Flask(__name__) # Cria a aplicação Flask
 
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return render_template("index.html") # Retorna uma página HTML com um formulário (não fornecido aqui)
 
 
-@app.route("/gerar-artigo", methods=["POST"])
+@app.route("/gerar-artigo", methods=["POST"]) 
 def gerar_artigo():
-    tema = request.form.get("tema")
+    tema = request.form.get("tema") # Tenta pegar o tema de um formulário HTML
     if not tema and request.is_json:
-        tema = request.json.get("tema")
+        tema = request.json.get("tema") # Alternativa: pegar tema de uma requisição JSON
     if not tema:
-        return jsonify({"erro": "Tema não fornecido"}), 400
+        return jsonify({"erro": "Tema não fornecido"}), 400 # Retorna erro se tema não foi enviado
 
-    artigo = generate_article(tema)
+    artigo = generate_article(tema) # Chama a função que usa a CrewAI para gerar o artigo
 
     if request.is_json:
-        return jsonify(artigo.dict())
+        return jsonify(artigo.dict()) # Retorna o artigo como JSON
     else:
         return f"""
 <!DOCTYPE html>
@@ -136,4 +136,4 @@ def gerar_artigo():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) # Executa o app localmente com modo de depuração

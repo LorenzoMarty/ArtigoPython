@@ -1,6 +1,6 @@
 class CustomTool:
     def __init__(self, name: str, description: str, func: callable):
-        self.name = name
+        self.name = name 
         self.description = description
         self.func = func
         
